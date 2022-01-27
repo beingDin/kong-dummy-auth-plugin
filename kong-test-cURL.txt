@@ -1,0 +1,87 @@
+C:\windows\system32>curl -v http://host.docker.internal:8000/api/uuid -H "access_key: 14503afb-202c-47e6-b82b-f15e5f4f5f04" -H "Content-Type: application/json"
+*   Trying 192.168.0.103...
+* TCP_NODELAY set
+* Connected to host.docker.internal (192.168.0.103) port 8000 (#0)
+> GET /api/uuid HTTP/1.1
+> Host: host.docker.internal:8000
+> User-Agent: curl/7.55.1
+> Accept: */*
+> access_key: 14503afb-202c-47e6-b82b-f15e5f4f5f04
+> Content-Type: application/json
+>
+< HTTP/1.1 200 OK
+< Content-Type: application/json
+< Content-Length: 53
+< Connection: keep-alive
+< X-Cache-Key: d9df8d758888e4adc1ed98cd7433dfb5
+< X-Cache-Status: Miss
+< access-key: 14503afb-202c-47e6-b82b-f15e5f4f5f04
+< id-token: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDb250ZW50IjoiZHVtbXktdG9rZW4iLCJJZCI6IjE0NTAzYWZiLTIwMmMtNDdlNi1iODJiLWYxNWU1ZjRmNWYwNCIsImV4cCI6MTUwMDAsImlzcyI6IktvbmcifQ.c9DCompBT2Bl7A_AxCAL5x_5C-XfjVs3dKpprUGAn4Y
+< Date: Wed, 26 Jan 2022 20:17:11 GMT
+< Server: gunicorn/19.9.0
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Credentials: true
+< X-Kong-Upstream-Latency: 1649
+< X-Kong-Proxy-Latency: 955
+< Via: kong/2.3.3
+<
+{
+  "uuid": "3e90c9da-7469-49e6-8f3b-4710eaaa14dc"
+}
+* Connection #0 to host host.docker.internal left intact
+
+C:\windows\system32>curl -v http://host.docker.internal:8000/api/uuid -H "access_key: 14503afb-202c-47e6-b82b-f15e5f4f5f04" -H "Content-Type: application/json"
+*   Trying 192.168.0.103...
+* TCP_NODELAY set
+* Connected to host.docker.internal (192.168.0.103) port 8000 (#0)
+> GET /api/uuid HTTP/1.1
+> Host: host.docker.internal:8000
+> User-Agent: curl/7.55.1
+> Accept: */*
+> access_key: 14503afb-202c-47e6-b82b-f15e5f4f5f04
+> Content-Type: application/json
+>
+< HTTP/1.1 200 OK
+< Content-Type: application/json
+< Connection: keep-alive
+< X-Cache-Key: d9df8d758888e4adc1ed98cd7433dfb5
+< id-token: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDb250ZW50IjoiZHVtbXktdG9rZW4iLCJJZCI6IjE0NTAzYWZiLTIwMmMtNDdlNi1iODJiLWYxNWU1ZjRmNWYwNCIsImV4cCI6MTUwMDAsImlzcyI6IktvbmcifQ.c9DCompBT2Bl7A_AxCAL5x_5C-XfjVs3dKpprUGAn4Y
+< X-Cache-Status: Hit
+< Date: Wed, 26 Jan 2022 20:17:11 GMT
+< Access-Control-Allow-Credentials: true
+< access-key: 14503afb-202c-47e6-b82b-f15e5f4f5f04
+< Age: 1
+< Server: gunicorn/19.9.0
+< Access-Control-Allow-Origin: *
+< Content-Length: 53
+< X-Kong-Upstream-Latency: 0
+< X-Kong-Proxy-Latency: 1
+< Via: kong/2.3.3
+<
+{
+  "uuid": "3e90c9da-7469-49e6-8f3b-4710eaaa14dc"
+}
+* Connection #0 to host host.docker.internal left intact
+
+C:\windows\system32>curl -v http://host.docker.internal:8000/api/uuid -H "access_key: invalid" -H "Content-Type: application/json"
+*   Trying 192.168.0.103...
+* TCP_NODELAY set
+* Connected to host.docker.internal (192.168.0.103) port 8000 (#0)
+> GET /api/uuid HTTP/1.1
+> Host: host.docker.internal:8000
+> User-Agent: curl/7.55.1
+> Accept: */*
+> access_key: invalid
+> Content-Type: application/json
+>
+< HTTP/1.1 401 Unauthorized
+< Date: Wed, 26 Jan 2022 20:17:54 GMT
+< Content-Type: application/json
+< Connection: keep-alive
+< X-Cache-Key: d9df8d758888e4adc1ed98cd7433dfb5
+< X-Cache-Status: Bypass
+< Content-Length: 35
+< X-Kong-Response-Latency: 649
+< Server: kong/2.3.3
+<
+Failed to Authenticate API Consumer* Connection #0 to host host.docker.internal left intact

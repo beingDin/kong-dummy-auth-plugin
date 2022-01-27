@@ -1,0 +1,30 @@
+_format_version: '2.1'
+_transform: true
+
+services:
+- name: dummy-service
+  url: http://httpbin.org/uuid
+  routes:
+  - name: dummy-service-route
+    paths:
+    - /api/uuid  
+  plugins:
+  - name: go-auth    
+    config:      
+      key_in_header: true
+      key_name: access_key
+      endpoint: http://mockbin.com/bin/
+      scope: view
+      identity_token: true  
+  - name: proxy-cache
+    route: dummy-service-route
+    config: 
+      response_code:
+      - 200
+      request_method:
+      - GET   
+      content_type:
+      - text/plain
+      - application/json
+      cache_ttl: 5
+      strategy: memory

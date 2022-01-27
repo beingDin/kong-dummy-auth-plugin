@@ -1,0 +1,95 @@
+C:\WS\demo\kong-dummy-auth-plugin>newman run gw-test-collection.json -e kong-test-env.json
+newman
+
+gw-test
+
+→ Kong Up & Running
+  GET 127.0.0.1:8001 [200 OK, 8.53kB, 131ms]
+  √  Kong Up & Running
+
+→ Dummy Service Available
+  GET 127.0.0.1:8001/services/dummy-service [200 OK, 588B, 14ms]
+  √  Status code is 200
+  √  Dummy Service Available
+
+→ Dummy Service Route Active
+  GET 127.0.0.1:8001/services/dummy-service/routes [200 OK, 745B, 14ms]
+  √  Status code is 200
+  √  Dummy Service Route Active
+
+→ Custom Plugin Available
+  GET 127.0.0.1:8001/plugins/enabled [200 OK, 269B, 10ms]
+  √  Status code is 200
+  √  Custom Plugin Available
+
+→ All Plugins Installed
+  GET 127.0.0.1:8001/plugins?size=2 [200 OK, 1.22kB, 11ms]
+  √  Status code is 200
+  √  Custom Plugin Installed
+  √  Proxy Cache Plugin Installed
+
+→ Caching Enabled at Route
+  GET 127.0.0.1:8001/routes/dummy-service-route/plugins [200 OK, 809B, 13ms]
+  √  Status code is 200
+  √  Caching Enabled For Dummy Service Route
+
+→ Proxy Route to Backend Set
+  GET 127.0.0.1:8001/routes/dummy-service-route/service [200 OK, 588B, 10ms]
+  √  Status code is 200
+  √  Proxy Route to Backend Set
+
+→ Backend Up & Running
+  GET http://httpbin.org/uuid [200 OK, 282B, 740ms]
+  √  Backend Up & Running
+
+→ Create Auth ID
+  POST http://mockbin.com/bin/create [201 Created, 1.21kB, 1071ms]
+  ┌
+  │ '0e56834f-9cef-4fe9-95d8-a01c2c9b9901'
+  └
+  √  Status code is 201
+
+→ View Auth ID
+  GET http://mockbin.com/bin/0e56834f-9cef-4fe9-95d8-a01c2c9b9901/view [200 OK, 1.36kB, 603ms]
+  √  Status code is 200
+
+→ Proxy Auth Success Cache Miss
+  GET 127.0.0.1:8000/api/uuid [200 OK, 702B, 2.6s]
+  √  Authentication Success
+  √  Cache Missed
+
+→ Proxy Auth Success Cache Hit
+  GET 127.0.0.1:8000/api/uuid [200 OK, 704B, 12ms]
+  √  Authentication Success
+  √  Cache Hit
+
+→ Proxy Auth Failure
+  ┌
+  │ 'Sleep Interval Initiated'
+  │ 'Sleep Interval Complete'
+  └
+  ┌
+  │ 'Sleeping for 5 seconds before next request.'
+  └
+  GET 127.0.0.1:8000/api/uuid [401 Unauthorized, 298B, 653ms]
+  √  Authentication Failure
+
+┌─────────────────────────┬────────────────────┬───────────────────┐
+│                         │           executed │            failed │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│              iterations │                  1 │                 0 │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│                requests │                 13 │                 0 │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│            test-scripts │                 13 │                 0 │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│      prerequest-scripts │                  1 │                 0 │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│              assertions │                 22 │                 0 │
+├─────────────────────────┴────────────────────┴───────────────────┤
+│ total run duration: 12.2s                                        │
+├──────────────────────────────────────────────────────────────────┤
+│ total data received: 11.66kB (approx)                            │
+├──────────────────────────────────────────────────────────────────┤
+│ average response time: 453ms [min: 10ms, max: 2.6s, s.d.: 717ms] │
+└──────────────────────────────────────────────────────────────────┘
